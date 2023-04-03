@@ -1,0 +1,54 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model SastTestApp.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @if (ViewBag.InvalidCred != null)
+    {
+        <div>
+            @ViewBag.InvalidCred
+        </div>
+    }
+    <div>
+        @Html.LabelFor(model => model.UserName)
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.UserName)
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(model => model.Password)
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.Password)
+    </div>
+    @Html.Captcha(4)
+    @if (ViewBag.CapMsg != null)
+    {
+        <div>
+            @ViewBag.CapMsg
+        </div>
+    }
+    <br />
+    <div>
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+</div>
+}
+<div>
+    <br />
+    @Html.ActionLink("New to this app Register!", "Register")
+</div>
+
